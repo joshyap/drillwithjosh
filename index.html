@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drill With Josh · Austin Pickleball Coaching</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --lime:   #C8F135;
+      --teal:   #0D4D52;
+      --dark:   #0A1A1C;
+      --mid:    #122A2E;
+      --cream:  #F5F0E8;
+      --orange: #F4622A;
+      --text:   #D4EDEA;
+      --muted:  #6B9A9F;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      background: rgba(10,26,28,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,241,53,0.12);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.08em;
+      color: var(--lime);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--lime); }
+    .nav-cta {
+      background: var(--lime);
+      color: var(--dark);
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: #d8ff3a; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10rem 3rem 6rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 8vw, 8rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .hero-headline .accent { color: var(--lime); display: block; }
+    .hero-sub {
+      max-width: 440px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.6s forwards;
+    }
+    .hero-buttons {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.8s forwards;
+    }
+    .btn-primary {
+      background: var(--lime);
+      color: var(--dark);
+      padding: 1rem 2.2rem;
+      border: none;
+      border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .btn-primary:hover { background: #d8ff3a; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(200,241,53,0.35);
+      border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--lime); color: var(--lime); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+      animation: fadeUp 0.7s 1s forwards;
+    }
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--lime);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* court graphic panel */
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .court-bg {
+      position: absolute; inset: 0;
+      background: var(--mid);
+    }
+    /* stylized court lines */
+    .court-lines {
+      position: absolute; inset: 0;
+      opacity: 0;
+      animation: fadeIn 1.2s 0.5s forwards;
+    }
+    .court-lines svg { width: 100%; height: 100%; }
+
+    .badge-floating {
+      position: absolute;
+      right: 2.5rem; bottom: 3.5rem;
+      background: var(--lime);
+      color: var(--dark);
+      padding: 1.5rem;
+      border-radius: 4px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.7s 1.2s forwards;
+    }
+    .badge-floating .badge-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      line-height: 1;
+    }
+    .badge-floating .badge-txt {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-top: 0.3rem;
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .marquee-strip {
+      background: var(--lime);
+      padding: 0.85rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-flex;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: var(--dark);
+      padding: 0 2.5rem;
+    }
+    .marquee-dot {
+      color: var(--teal);
+      opacity: 0.5;
+    }
+
+    /* ── SERVICES ── */
+    section { padding: 6rem 5rem; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 0.95;
+      color: var(--cream);
+      margin-bottom: 3.5rem;
+      max-width: 600px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(200,241,53,0.08);
+      border: 1px solid rgba(200,241,53,0.08);
+    }
+    .service-card {
+      background: var(--dark);
+      padding: 2.8rem 2.2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--lime);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover { background: var(--mid); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+    }
+    .service-price {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--lime);
+      letter-spacing: 0.04em;
+    }
+    .service-price span {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      background: var(--mid);
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .steps { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 1rem; }
+    .step {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      line-height: 1;
+      color: rgba(200,241,53,0.2);
+      min-width: 3rem;
+      transition: color 0.3s;
+    }
+    .step:hover .step-num { color: var(--lime); }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .step-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .drill-list {
+      background: var(--dark);
+      border: 1px solid rgba(200,241,53,0.12);
+      border-radius: 4px;
+      padding: 2.5rem;
+    }
+    .drill-list h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      color: var(--lime);
+      margin-bottom: 1.5rem;
+    }
+    .drill-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .drill-item:last-child { border-bottom: none; }
+    .drill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lime);
+      flex-shrink: 0;
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .about-text .section-title { max-width: 500px; }
+    .about-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .credential-chips {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-top: 2rem;
+    }
+    .chip {
+      padding: 0.45rem 1rem;
+      border: 1px solid rgba(200,241,53,0.3);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lime);
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: var(--mid);
+      border: 1px solid rgba(200,241,53,0.1);
+      border-radius: 4px;
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+    .about-card::after {
+      content: '';
+      position: absolute;
+      top: 12px; left: 12px;
+      right: -12px; bottom: -12px;
+      border: 1px solid rgba(200,241,53,0.15);
+      border-radius: 4px;
+      z-index: -1;
+    }
+    .rating-row {
+      display: flex; align-items: baseline; gap: 0.8rem;
+      margin-bottom: 0.4rem;
+    }
+    .rating-big {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--lime);
+      line-height: 1;
+    }
+    .stars { color: var(--orange); font-size: 1.1rem; letter-spacing: 0.1em; }
+    .rating-label { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .quote {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
+      margin: 1.8rem 0 1.2rem;
+      padding-left: 1.2rem;
+      border-left: 2px solid var(--lime);
+    }
+    .quote-attr { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── PRICING ── */
+    .pricing-section { background: var(--mid); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .price-card {
+      background: var(--dark);
+      border: 1px solid rgba(200,241,53,0.1);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .price-card:hover { transform: translateY(-4px); border-color: rgba(200,241,53,0.4); }
+    .price-card.featured {
+      border-color: var(--lime);
+      background: var(--mid);
+    }
+    .featured-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--lime);
+      color: var(--dark);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+    }
+    .price-tier {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .price-amount {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .price-amount sup { font-size: 1.4rem; vertical-align: top; margin-top: 0.5rem; color: var(--muted); }
+    .price-per { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 2rem; }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2.5rem; }
+    .price-features li {
+      font-size: 0.87rem;
+      color: var(--text);
+      display: flex; gap: 0.7rem; align-items: flex-start;
+    }
+    .price-features li::before { content: '→'; color: var(--lime); flex-shrink: 0; }
+
+    /* ── FAQ ── */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(200,241,53,0.06);
+    }
+    .faq-item {
+      background: var(--dark);
+      padding: 2.2rem 2.5rem;
+      cursor: pointer;
+    }
+    .faq-item:hover { background: var(--mid); }
+    .faq-q {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+    .faq-a {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--lime);
+      padding: 5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: center;
+    }
+    .cta-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 0.95;
+      color: var(--dark);
+      max-width: 600px;
+    }
+    .cta-sub {
+      font-size: 1rem;
+      color: rgba(10,26,28,0.65);
+      margin-top: 1rem;
+      max-width: 480px;
+    }
+    .btn-dark {
+      background: var(--dark);
+      color: var(--lime);
+      padding: 1.2rem 2.8rem;
+      border: none;
+      border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .btn-dark:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(200,241,53,0.08);
+      padding: 3rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--lime);
+      letter-spacing: 0.08em;
+    }
+    .footer-links { display: flex; gap: 1.8rem; }
+    .footer-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--lime); }
+    .footer-copy { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── CONTACT FORM ── */
+    .contact-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .form-grid { display: flex; flex-direction: column; gap: 1.2rem; }
+    .input-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .input-group label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+      background: var(--mid);
+      border: 1px solid rgba(200,241,53,0.15);
+      border-radius: 2px;
+      padding: 0.9rem 1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input-group input:focus,
+    .input-group select:focus,
+    .input-group textarea:focus { border-color: var(--lime); }
+    .input-group select option { background: var(--dark); }
+    .input-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 8rem 2rem 4rem; }
+      .hero-right { display: none; }
+      section { padding: 4rem 2rem; }
+      .services-grid,
+      .pricing-grid { grid-template-columns: 1fr; }
+      .how-section,
+      .about-section,
+      .contact-section { grid-template-columns: 1fr; gap: 3rem; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .cta-banner { grid-template-columns: 1fr; padding: 3rem 2rem; }
+      footer { padding: 2rem; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">DRILL WITH JOSH</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="https://calendar.app.google/FHGMiCVN2tfpj4bn8" target="_blank" rel="noopener">Book a Session</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Austin, TX · Private Drilling Partner</p>
+      <h1 class="hero-headline">
+        Level Up<br />
+        Your<br />
+        <span class="accent">Pickleball.</span>
+      </h1>
+      <p class="hero-sub">One-on-one drilling sessions built around your weaknesses. No fluff — just reps, feedback, and measurable improvement on every ball.</p>
+      <div class="hero-buttons">
+        <a class="btn-primary" href="https://calendar.app.google/FHGMiCVN2tfpj4bn8" target="_blank" rel="noopener">Book a Time →</a>
+        <a class="btn-outline" href="#services">See Packages</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-val">3.5–5.0</div>
+          <div class="stat-label">All Skill Levels</div>
+        </div>
+        <div>
+          <div class="stat-val">ATX</div>
+          <div class="stat-label">Mobile · Your Court</div>
+        </div>
+        <div>
+          <div class="stat-val">60 min</div>
+          <div class="stat-label">Focused Reps</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="court-bg"></div>
+      <div class="court-lines">
+        <svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <!-- court background fill -->
+          <rect width="600" height="700" fill="#0D4D52" opacity="0.6"/>
+          <!-- outer boundary -->
+          <rect x="80" y="60" width="440" height="580" fill="none" stroke="#C8F135" stroke-width="2.5" opacity="0.7"/>
+          <!-- kitchen lines -->
+          <line x1="80" y1="200" x2="520" y2="200" stroke="#C8F135" stroke-width="2" opacity="0.5"/>
+          <line x1="80" y1="500" x2="520" y2="500" stroke="#C8F135" stroke-width="2" opacity="0.5"/>
+          <!-- center line -->
+          <line x1="300" y1="200" x2="300" y2="500" stroke="#C8F135" stroke-width="2" opacity="0.5"/>
+          <!-- net -->
+          <line x1="80" y1="350" x2="520" y2="350" stroke="#F5F0E8" stroke-width="3" opacity="0.9"/>
+          <!-- net posts -->
+          <line x1="80" y1="340" x2="80" y2="360" stroke="#F5F0E8" stroke-width="4" opacity="0.9"/>
+          <line x1="520" y1="340" x2="520" y2="360" stroke="#F5F0E8" stroke-width="4" opacity="0.9"/>
+          <!-- decorative ball 1 -->
+          <circle cx="230" cy="270" r="14" fill="#C8F135" opacity="0.9"/>
+          <circle cx="230" cy="270" r="14" fill="none" stroke="#0A1A1C" stroke-width="1.5" opacity="0.5"/>
+          <!-- decorative ball 2 (motion) -->
+          <circle cx="360" cy="420" r="14" fill="#C8F135" opacity="0.7"/>
+          <!-- motion arc -->
+          <path d="M230 270 Q290 180 360 420" fill="none" stroke="#C8F135" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.4"/>
+          <!-- shadow ellipses for depth -->
+          <ellipse cx="300" cy="640" rx="180" ry="30" fill="#0A1A1C" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="badge-floating">
+        <div class="badge-num">100%</div>
+        <div class="badge-txt">Focus On You</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Dink Consistency</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Third Shot Drop</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Speed-Up Defense</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Reset Under Pressure</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Erne & ATP</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Court Positioning</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Dink Consistency</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Third Shot Drop</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Speed-Up Defense</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Reset Under Pressure</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Erne & ATP</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Court Positioning</span><span class="marquee-item marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">What We Work On</p>
+    <h2 class="section-title">Drilling<br />Sessions That<br />Actually Move<br />The Needle</h2>
+    <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <div class="service-name">Single Skill Focus</div>
+        <p class="service-desc">Pick one shot, drill it to death. Third shot drops, dinks, resets, speed-ups — 60 minutes of pure repetition on the thing holding you back.</p>
+        <div class="service-price">$60 <span>/ session</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <div class="service-name">Full Skill Audit</div>
+        <p class="service-desc">We run through your whole game — groundstrokes, kitchen play, serve & return, transition zone. You leave with a prioritized improvement roadmap.</p>
+        <div class="service-price">$85 <span>/ session</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔁</div>
+        <div class="service-name">Drill + Rally Hybrid</div>
+        <p class="service-desc">45 minutes of targeted drilling followed by live-ball play to transfer the reps under game pressure. Ideal for players 3.5 and up.</p>
+        <div class="service-price">$75 <span>/ session</span></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎥</div>
+        <div class="service-name">Video Analysis</div>
+        <p class="service-desc">I bring a tripod so you can record your own reps, or I'll handle filming if you prefer. Watch your mechanics back on the spot — seeing it yourself is worth a hundred verbal cues.</p>
+        <div class="service-price" style="font-size:1.1rem;color:var(--muted);">Add-on · included with 4 & 8-packs</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏓</div>
+        <div class="service-name">Paddle Demo & Rec</div>
+        <p class="service-desc">Not sure if your paddle is holding you back? I bring a small demo selection and can let you hit with a few options. No sales pitch — just honest input on what might fit your game better.</p>
+        <div class="service-price" style="font-size:1.1rem;color:var(--muted);">Free with any session</div>
+      </div>
+      <div class="service-card" style="border: 1px dashed rgba(200,241,53,0.25); opacity: 0.6;">
+        <div class="service-icon">✦</div>
+        <div class="service-name" style="color:var(--muted);">Coming Soon</div>
+        <p class="service-desc" style="font-style:italic;">A new service is in the works. Check back soon — or reach out if you have something specific in mind.</p>
+        <div class="service-price" style="font-size:1rem;color:var(--muted);">TBD</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="how-section">
+    <div>
+      <p class="section-label">The Process</p>
+      <h2 class="section-title">Simple, Focused, Effective</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">You Pick the Goal</div>
+            <p class="step-body">Tell me what you want to work on — or let me watch you hit a few balls first and I'll make the call.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">We Design the Drill</div>
+            <p class="step-body">No generic drills. Every session is structured around your mechanics and the specific pattern you're trying to build.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Reps With Feedback</div>
+            <p class="step-body">I feed, shadow, or play the target role. Real-time cues keep you correcting in the moment, not guessing later.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Debrief + Homework</div>
+            <p class="step-body">End-of-session breakdown: what clicked, what still needs reps, and 2–3 things to practice on your own before next time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="drill-list">
+      <h3>Skills In My Rotation</h3>
+      <div class="drill-item"><span class="drill-dot"></span>Third shot drop (cross-court & straight)</div>
+      <div class="drill-item"><span class="drill-dot"></span>Dinking — consistency, direction & pace control</div>
+      <div class="drill-item"><span class="drill-dot"></span>Speed-up attacks & counter-punch defense</div>
+      <div class="drill-item"><span class="drill-dot"></span>Transition zone movement & reset mechanics</div>
+      <div class="drill-item"><span class="drill-dot"></span>Serve depth & return positioning</div>
+      <div class="drill-item"><span class="drill-dot"></span>Overhead & lob coverage</div>
+      <div class="drill-item"><span class="drill-dot"></span>Erne setup & around-the-post (ATP) attempts</div>
+      <div class="drill-item"><span class="drill-dot"></span>Stacking patterns & poaching communication</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="about-text">
+      <p class="section-label">Your Drilling Partner</p>
+      <h2 class="section-title">Not a Coach.<br />A Partner Who<br />Shows Up Ready.</h2>
+      <p class="about-body">I'm Josh, an Austin-based pickleball player who got serious about drilling after hitting a plateau at 3.5. I spent a year obsessing over mechanics, watching pro footage, and finding a local 4.5 mentor who helped me crack 4.0 inside eight months.</p>
+      <p class="about-body">Now I do for other players what that drilling partner did for me: show up, feed balls, give honest feedback, and keep the reps coming. I'm not a certified coach — I'm someone who has done the reps and wants to help you do the same.</p>
+      <div class="credential-chips">
+        <span class="chip">ATX Based</span>
+        <span class="chip">4.0+ Player</span>
+        <span class="chip">Mobile · Your Court</span>
+        <span class="chip">~3 Years Playing</span>
+        <span class="chip">DUPR Rated</span>
+      </div>
+      <div style="display:flex;gap:1rem;margin-top:1.8rem;">
+        <a href="https://www.instagram.com/joshplayspb" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid rgba(200,241,53,0.25);border-radius:2px;color:var(--text);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#C8F135';this.style.color='#C8F135'" onmouseout="this.style.borderColor='rgba(200,241,53,0.25)';this.style.color='var(--text)'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          @joshplayspb
+        </a>
+        <a href="https://www.youtube.com/@Joshplayspb" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid rgba(200,241,53,0.25);border-radius:2px;color:var(--text);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#C8F135';this.style.color='#C8F135'" onmouseout="this.style.borderColor='rgba(200,241,53,0.25)';this.style.color='var(--text)'">
+          <svg width="16" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+          @Joshplayspb
+        </a>
+      </div>
+    </div>
+    <div class="about-visual">
+      <!-- PROFILE PHOTO PLACEHOLDER — replace src with your photo when ready -->
+      <div style="
+        width: 100%;
+        aspect-ratio: 4/5;
+        background: var(--mid);
+        border: 2px dashed rgba(200,241,53,0.25);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      ">
+        <!-- swap the div above for: <img src="your-photo.jpg" alt="Josh" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;display:block;" /> -->
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.35">
+          <circle cx="26" cy="18" r="10" stroke="#C8F135" stroke-width="2"/>
+          <path d="M6 46c0-11.046 8.954-20 20-20s20 8.954 20 20" stroke="#C8F135" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span style="font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(200,241,53,0.35);">Your Photo Here</span>
+      </div>
+      <div class="about-card">
+        <div class="rating-row">
+          <div class="rating-big">5.0</div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="rating-label">Average Session Rating</div>
+        <p class="quote">"Josh doesn't waste a single minute. We drilled third-shot drops for an hour and I left having genuinely fixed something. Booked a second session on the spot."</p>
+        <div class="quote-attr">— Mike T., Austin TX · 3.5 Player</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing-section">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Straightforward.<br />No Contracts.</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Drop-In</div>
+        <div class="price-amount"><sup>$</sup>60–85</div>
+        <div class="price-per">per 60-min session · pay as you go</div>
+        <ul class="price-features">
+          <li>Any session type</li>
+          <li>Scheduling within 48 hrs</li>
+          <li>Post-session notes via text</li>
+          <li>No commitment needed</li>
+        </ul>
+        <a class="btn-outline" href="#book" style="display:inline-block;text-align:center;">Book Now</a>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="price-tier">4-Pack</div>
+        <div class="price-amount"><sup>$</sup>220</div>
+        <div class="price-per">4 sessions · save ~$25</div>
+        <ul class="price-features">
+          <li>4 × 60-min sessions</li>
+          <li>Priority scheduling</li>
+          <li>Progress tracking between sessions</li>
+          <li>Drill plan customized per session</li>
+          <li>30-day expiry</li>
+        </ul>
+        <a class="btn-primary" href="#book" style="display:inline-block;text-align:center;">Get the 4-Pack</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">8-Pack</div>
+        <div class="price-amount"><sup>$</sup>400</div>
+        <div class="price-per">8 sessions · best value</div>
+        <ul class="price-features">
+          <li>8 × 60-min sessions</li>
+          <li>Priority scheduling</li>
+          <li>Video review (you film, I comment)</li>
+          <li>Personalized improvement roadmap</li>
+          <li>60-day expiry</li>
+        </ul>
+        <a class="btn-outline" href="#book" style="display:inline-block;text-align:center;">Get the 8-Pack</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <p class="section-label">Questions</p>
+    <h2 class="section-title">Stuff People<br />Usually Ask</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">Where do sessions take place?</div>
+        <p class="faq-a">I come to you. If you have access to a court (HOA, park, club), I'll meet you there. I can also help find available public courts in Austin if you need one.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need to bring anything?</div>
+        <p class="faq-a">Just your paddle and water. I bring a hopper of balls. If you want to use your own balls, that's fine too.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What skill level do you work with?</div>
+        <p class="faq-a">Primarily 3.5–4.5 players who have the basics and want to drill specific shots. Beginners are welcome but better served by a certified instructor first.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Are you a certified pickleball coach?</div>
+        <p class="faq-a">No. I'm a 4.0+ player and dedicated drilling partner — not a certified instructor. Think of me as an experienced playing partner who shows up with a plan and a ball hopper.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's your cancellation policy?</div>
+        <p class="faq-a">Cancel or reschedule with 24 hours notice and there's no charge. Same-day cancellations forfeit the session for pack holders or require payment for drop-ins.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I pay?</div>
+        <p class="faq-a">Venmo or Zelle, same day as the session. Pack purchases upfront. Simple as that — no subscription platforms, no complicated checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / BOOK -->
+  <section id="book" class="contact-section">
+    <div>
+      <p class="section-label">Get Started</p>
+      <h2 class="section-title">Ready to<br />Drill?</h2>
+      <p class="about-body">Fill out the form and I'll text or email you within 24 hours to confirm a time. First-timers: no pressure, no upsell — just a session.</p>
+
+      <div style="display:flex;flex-direction:column;gap:0.9rem;margin-top:1.5rem;">
+        <a href="https://calendar.app.google/FHGMiCVN2tfpj4bn8" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:0.6rem;width:fit-content;padding:0.9rem 1.6rem;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3" width="14" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1 7h14" stroke="currentColor" stroke-width="1.5"/><path d="M5 1v4M11 1v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Book a Time Directly →
+        </a>
+        <p style="font-size:0.78rem;letter-spacing:0.08em;color:var(--muted);">or fill in the form and I'll reach out</p>
+      </div>
+
+      <div style="margin-top:2rem;display:flex;flex-direction:column;gap:0.55rem;">
+        <a href="mailto:joshplayspb@gmail.com" style="color:var(--lime);text-decoration:none;font-size:0.9rem;display:flex;align-items:center;gap:0.5rem;">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3" width="13" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M1 4l6.5 5L14 4" stroke="currentColor" stroke-width="1.3"/></svg>
+          joshplayspb@gmail.com
+        </a>
+        <a href="tel:+15125550000" style="color:var(--lime);text-decoration:none;font-size:0.9rem;display:flex;align-items:center;gap:0.5rem;" id="phoneLink">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 1.5C4.5 1.5 3 4 3 6c0 2 1 3.5 3 5s3 2 5 2c2 0 3.5-1.5 3.5-1.5l-2-2.5s-.5.5-1.5.5-2.5-1.5-3-3-.5-2.5-.5-2.5L4.5 1.5z" stroke="currentColor" stroke-width="1.3"/></svg>
+          <span style="color:rgba(200,241,53,0.4);font-style:italic;">(512) 000-0000 · update with Google Voice number</span>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="form-grid" id="bookingForm">
+        <div class="form-row">
+          <div class="input-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" placeholder="Alex" />
+          </div>
+          <div class="input-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" placeholder="Torres" />
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="email">Your Email</label>
+          <input id="email" type="email" placeholder="alex@email.com" />
+        </div>
+        <div class="input-group">
+          <label for="phone">Phone (optional)</label>
+          <input id="phone" type="tel" placeholder="(512) 555-0190" />
+        </div>
+        <div class="input-group">
+          <label for="sessionType">Session Type</label>
+          <select id="sessionType">
+            <option value="">Select a session type</option>
+            <option>Single Skill Focus · $60</option>
+            <option>Drill + Rally Hybrid · $75</option>
+            <option>Full Skill Audit · $85</option>
+            <option>4-Pack · $220</option>
+            <option>8-Pack · $400</option>
+            <option>Video Analysis Add-on</option>
+            <option>Paddle Demo & Recommendation</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="skillLevel">Approximate Skill Level</label>
+          <select id="skillLevel">
+            <option value="">Select level</option>
+            <option>3.0 – Just getting consistent</option>
+            <option>3.5 – Can rally, working on placement</option>
+            <option>4.0 – Competing, refining strategy</option>
+            <option>4.5 – Competitive, dialing in advanced shots</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="notes">What do you want to work on?</label>
+          <textarea id="notes" placeholder="e.g. My third shot drop is inconsistent under pressure, and I get punished when I'm late to the kitchen..."></textarea>
+        </div>
+        <button class="btn-primary" id="submitBtn" style="width:100%;padding:1.1rem;font-size:0.9rem;" onclick="sendBookingEmail()">
+          Send Booking Request
+        </button>
+      </div>
+
+      <script>
+        function sendBookingEmail() {
+          const firstName   = document.getElementById('firstName').value.trim();
+          const lastName    = document.getElementById('lastName').value.trim();
+          const email       = document.getElementById('email').value.trim();
+          const phone       = document.getElementById('phone').value.trim();
+          const sessionType = document.getElementById('sessionType').value;
+          const skillLevel  = document.getElementById('skillLevel').value;
+          const notes       = document.getElementById('notes').value.trim();
+
+          if (!firstName || !email || !sessionType) {
+            alert('Please fill in at least your first name, email, and session type.');
+            return;
+          }
+
+          const subject = encodeURIComponent(`Drilling Session Request – ${firstName} ${lastName}`);
+          const body = encodeURIComponent(
+`Hi Josh,
+
+I'd like to book a drilling session with you. Here are my details:
+
+Name:         ${firstName} ${lastName}
+Email:        ${email}
+Phone:        ${phone || 'Not provided'}
+Session Type: ${sessionType}
+Skill Level:  ${skillLevel || 'Not specified'}
+
+What I want to work on:
+${notes || 'Not specified'}
+
+Looking forward to hearing from you!`
+          );
+
+          window.location.href = `mailto:joshplayspb@gmail.com?subject=${subject}&body=${body}`;
+
+          const btn = document.getElementById('submitBtn');
+          btn.textContent = '✓ Opening Your Email App...';
+          btn.style.background = '#0D4D52';
+          btn.style.color = '#C8F135';
+          setTimeout(() => {
+            btn.textContent = 'Send Booking Request';
+            btn.style.background = '';
+            btn.style.color = '';
+          }, 3000);
+        }
+      </script>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <div>
+      <h2 class="cta-headline">Stop Playing the Same Game. Start Drilling.</h2>
+      <p class="cta-sub">One focused session beats ten casual rallies. Book in under 2 minutes.</p>
+    </div>
+    <a class="btn-dark" href="https://calendar.app.google/FHGMiCVN2tfpj4bn8" target="_blank" rel="noopener">Book a Session →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">DRILL WITH JOSH</div>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#book">Book</a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/joshplayspb" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        Instagram
+      </a>
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@Joshplayspb" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;">
+        <svg width="15" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+        YouTube
+      </a>
+    </div>
+    <div class="footer-copy">© 2025 Josh Yap · Austin, TX · joshplayspb@gmail.com</div>
+  </footer>
+
+</body>
+</html>
