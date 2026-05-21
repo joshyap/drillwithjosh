@@ -648,22 +648,170 @@
     .input-group textarea { resize: vertical; min-height: 120px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 
-    /* ── RESPONSIVE ── */
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--lime);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,26,28,0.97);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-drawer a:hover { color: var(--lime); }
+    .nav-drawer .drawer-cta {
+      margin-top: 1rem;
+      background: var(--lime);
+      color: var(--dark);
+      padding: 1rem 2.5rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    /* ── TABLET (≤900px) ── */
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 8rem 2rem 4rem; }
+      .nav-hamburger { display: flex; }
+      /* hide desktop CTA in nav on mobile — drawer has it */
+      .nav-cta { display: none; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 1.8rem 4rem; }
       .hero-right { display: none; }
-      section { padding: 4rem 2rem; }
-      .services-grid,
-      .pricing-grid { grid-template-columns: 1fr; }
-      .how-section,
-      .about-section,
-      .contact-section { grid-template-columns: 1fr; gap: 3rem; }
+
+      section { padding: 4rem 1.8rem; }
+
+      .services-grid { grid-template-columns: 1fr 1fr !important; }
+
+      .how-section {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 4rem 1.8rem;
+      }
+      .about-section {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .contact-section {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+
       .faq-grid { grid-template-columns: 1fr; }
-      .cta-banner { grid-template-columns: 1fr; padding: 3rem 2rem; }
-      footer { padding: 2rem; flex-direction: column; text-align: center; }
+
+      .cta-banner {
+        grid-template-columns: 1fr;
+        padding: 4rem 1.8rem;
+        gap: 2rem;
+      }
+
+      footer {
+        padding: 2rem 1.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .footer-links { flex-wrap: wrap; gap: 1rem 1.5rem; }
+    }
+
+    /* ── MOBILE (≤600px) ── */
+    @media (max-width: 600px) {
+      .hero-left { padding: 6rem 1.4rem 3.5rem; }
+      .hero-headline { font-size: clamp(3.8rem, 16vw, 5.5rem); }
+      .hero-sub { font-size: 0.95rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .stat-val { font-size: 2rem; }
+
+      section { padding: 3.5rem 1.4rem; }
+
+      .section-title { font-size: clamp(2.2rem, 10vw, 3.2rem); margin-bottom: 2.5rem; }
+
+      .services-grid { grid-template-columns: 1fr !important; }
+      .service-card { padding: 2rem 1.5rem; }
+
+      .pricing-grid { grid-template-columns: 1fr; }
+      .price-card { padding: 2rem 1.5rem; }
+
+      .steps { gap: 2rem; }
+      .step-num { font-size: 2.5rem; min-width: 2.2rem; }
+      .drill-list { padding: 1.8rem 1.4rem; }
+
+      .about-body { font-size: 0.92rem; }
+      .credential-chips { gap: 0.5rem; }
+
+      /* social buttons stack on very small screens */
+      .social-row { flex-direction: column !important; }
+
+      .faq-item { padding: 1.6rem 1.4rem; }
+      .faq-q { font-size: 1.05rem; }
+
+      .cta-banner { padding: 3rem 1.4rem; }
+      .cta-headline { font-size: clamp(2rem, 9vw, 2.8rem); }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      footer { padding: 2rem 1.4rem; }
+      .footer-links { gap: 0.8rem 1.2rem; }
+
+      /* contact section info links readable size */
+      .contact-section a[href^="mailto"],
+      .contact-section a[href^="tel"] { font-size: 0.85rem; }
+
+      /* booking calendar button full-width */
+      .contact-section .btn-primary { width: 100%; justify-content: center; }
+
+      /* about card */
+      .about-card { padding: 2rem 1.5rem; }
+      .rating-big { font-size: 3rem; }
+    }
+
+    /* ── SMALL (≤380px) ── */
+    @media (max-width: 380px) {
+      .hero-headline { font-size: clamp(3.2rem, 18vw, 4.2rem); }
+      .nav-logo { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -680,7 +828,39 @@
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a class="nav-cta" href="https://calendar.app.google/FHGMiCVN2tfpj4bn8" target="_blank" rel="noopener">Book a Session</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE NAV DRAWER -->
+  <nav class="nav-drawer" id="navDrawer">
+    <a href="#services" class="drawer-link">Services</a>
+    <a href="#how" class="drawer-link">How It Works</a>
+    <a href="#about" class="drawer-link">About</a>
+    <a href="#pricing" class="drawer-link">Pricing</a>
+    <a href="#faq" class="drawer-link">FAQ</a>
+    <a href="#book" class="drawer-link">Contact</a>
+    <a href="https://calendar.app.google/FHGMiCVN2tfpj4bn8" target="_blank" rel="noopener" class="drawer-cta">Book a Session →</a>
+  </nav>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('navDrawer');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navDrawer.classList.toggle('open');
+      document.body.style.overflow = navDrawer.classList.contains('open') ? 'hidden' : '';
+    });
+    // close drawer when any link is tapped
+    navDrawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navDrawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
 
   <!-- HERO -->
   <section class="hero">
@@ -872,7 +1052,7 @@
         <span class="chip">~3 Years Playing</span>
         <span class="chip">DUPR Rated</span>
       </div>
-      <div style="display:flex;gap:1rem;margin-top:1.8rem;">
+      <div class="social-row" style="display:flex;gap:1rem;margin-top:1.8rem;flex-wrap:wrap;">
         <a href="https://www.instagram.com/joshplayspb" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid rgba(200,241,53,0.25);border-radius:2px;color:var(--text);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='#C8F135';this.style.color='#C8F135'" onmouseout="this.style.borderColor='rgba(200,241,53,0.25)';this.style.color='var(--text)'">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
           @joshplayspb
