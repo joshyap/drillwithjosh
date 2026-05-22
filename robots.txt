@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joshyap.github.io/drill-with-josh/sitemap.xml
